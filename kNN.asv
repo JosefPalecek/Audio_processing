@@ -1,0 +1,45 @@
+clear all;
+clc;
+close all;
+
+%1.trida
+trida1=[1,3;2,2;2,3;2,4;1,5;3,5;1,4];
+%2.trida
+trida2=[4,9;4,8;3,9;4,1;5,9;5,1];
+%3.trida
+trida3=[8,6;9,3;9,5;7,5;7,4;8,4;8,5];
+% zapis hodnoty x a y
+x=input('Zapis hodnotu bodu x: ');
+y=input('Zapis hodnotu bodu y: ');
+bod = [x,y];
+
+figure();
+plot(trida1(:,1),trida1(:,2),'bx'); hold on;
+plot(trida2(:,1),trida2(:,2),'rx');hold on;
+plot(trida3(:,1),trida3(:,2),'mo');hold on;
+plot(x,y,'g+');
+vzor=[trida1;trida2;trida3];
+L = length(vzor); % celkový poèet vzorù
+
+% výpoèet euklidovské vzdálenosti všech vzorù od zadaneho bodu
+for i=1:L
+    vzdalenost(i) = sqrt(sum((vzor(i,:) - bod).^2));
+end
+nejmensi_vzdalenost=min(vzdalenost);
+
+a=0;    % indexace vektoru "pozice"
+for i=1:L
+    if vzdalenost(i) == nejmensi_vzdalenost  % pokud je na pozici "i" stejna hodnota jako nejmensi vzdalenost 
+        a=a+1;
+            pozice(a)=i; % tak zapis do vektoru "pozice" hodnotu na kterem jsi nasel nejmensi vzdalenost 
+    end
+end
+i=length(pozice);
+    if (pozice(i)<=7)   
+            fprintf('K = %d: Bod(%d,%d) patri do 1 tridy!\n',i,x,y);
+        else if (pozice(i)>7 && pozice(i)<=13)
+            fprintf('K = %d: Bod(%d,%d) patri do 2 tridy!\n',i,x,y);
+        else
+            fprintf('K = %d: Bod(%d,%d) patri do 3 tridy!\n',i,x,y);
+            end
+    end
